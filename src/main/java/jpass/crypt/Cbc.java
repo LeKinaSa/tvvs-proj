@@ -60,7 +60,7 @@ public class Cbc {
     /**
      * temporary block. It will only be used for decryption.
      */
-    private byte[] _buffer = null;
+    private final byte[] _buffer;
 
     /**
      * temporary block.
@@ -128,7 +128,7 @@ public class Cbc {
      *
      * @param inBuffer storage of the encrypted block
      */
-    private void decryptBlock(byte[] inBuffer) {
+    private void decryptBlock(final byte[] inBuffer) {
         System.arraycopy(inBuffer, 0, this._buffer, 0, BLOCK_SIZE);
         this._cipher.decrypt(this._buffer, 0, this._tmp, 0);
         for (int i = 0; i < BLOCK_SIZE; ++i) {
@@ -147,18 +147,6 @@ public class Cbc {
     public void encrypt(byte[] data) throws IOException {
         if (data != null) {
             encrypt(data, data.length);
-        }
-    }
-
-    /**
-     * Decrypts the array. The whole array will be decrypted.
-     *
-     * @param data {@code byte}s that should be decrypted
-     * @throws IOException if the writing fails
-     */
-    public void decrypt(byte[] data) throws IOException {
-        if (data != null) {
-            decrypt(data, data.length);
         }
     }
 
@@ -182,6 +170,18 @@ public class Cbc {
                 this._output.write(this._outBuffer);
                 this._overflowUsed = 0;
             }
+        }
+    }
+
+    /**
+     * Decrypts the array. The whole array will be decrypted.
+     *
+     * @param data {@code byte}s that should be decrypted
+     * @throws IOException if the writing fails
+     */
+    public void decrypt(byte[] data) throws IOException {
+        if (data != null) {
+            decrypt(data, data.length);
         }
     }
 

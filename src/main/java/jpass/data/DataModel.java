@@ -46,7 +46,7 @@ public class DataModel {
 
     private Entries entries = new Entries();
     private String fileName = null;
-    private byte[] password = null;
+    private byte[] password;
     private boolean modified = false;
 
     private DataModel() {

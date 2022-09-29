@@ -80,7 +80,7 @@ public final class Aes256 {
     private static final int EXPANDED_KEY_SIZE = (ROUNDS + 1) * BLOCK_SIZE;
 
     /**
-     * expanded key
+     * Expanded key.
      */
     private final byte[] _expandedKey;
 
@@ -360,13 +360,13 @@ public final class Aes256 {
      * @param index position of the first element of the column
      */
     private void mixColumn(int index) {
-        int s0 = mul(2, this._tmp[index]) ^ mul(3, this._tmp[index + 1])
+        final int s0 = mul(2, this._tmp[index]) ^ mul(3, this._tmp[index + 1])
                 ^ (this._tmp[index + 2] & 0xff) ^ (this._tmp[index + 3] & 0xff);
-        int s1 = (this._tmp[index] & 0xff) ^ mul(2, this._tmp[index + 1])
+        final int s1 = (this._tmp[index] & 0xff) ^ mul(2, this._tmp[index + 1])
                 ^ mul(3, this._tmp[index + 2]) ^ (this._tmp[index + 3] & 0xff);
-        int s2 = (this._tmp[index] & 0xff) ^ (this._tmp[index + 1] & 0xff)
+        final int s2 = (this._tmp[index] & 0xff) ^ (this._tmp[index + 1] & 0xff)
                 ^ mul(2, this._tmp[index + 2]) ^ mul(3, this._tmp[index + 3]);
-        int s3 = mul(3, this._tmp[index]) ^ (this._tmp[index + 1] & 0xff)
+        final int s3 = mul(3, this._tmp[index]) ^ (this._tmp[index + 1] & 0xff)
                 ^ (this._tmp[index + 2] & 0xff) ^ mul(2, this._tmp[index + 3]);
         this._tmp[index] = (byte) (s0 & 0xff);
         this._tmp[index + 1] = (byte) (s1 & 0xff);

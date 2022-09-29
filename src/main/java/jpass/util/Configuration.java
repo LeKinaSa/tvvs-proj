@@ -41,7 +41,9 @@ import java.util.logging.Logger;
  * @author Gabor_Bata
  */
 public final class Configuration {
-
+    /**
+     * Reference to a Logger object.
+     */
     private static final Logger LOG = Logger.getLogger(Configuration.class.getName());
     private static Configuration INSTANCE;
     private Properties properties = new Properties();
