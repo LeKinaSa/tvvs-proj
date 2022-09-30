@@ -7,7 +7,7 @@
 | Clara Alves Martins | up201806528 |
 | Daniel Filipe Amaro Monteiro | up201806185 |
 
-## Questions
+## Static Testing
 
 ### Project description: what is it and how is the source code organized
 
@@ -191,7 +191,6 @@ After:
 
 Before:
 ```java
-
 63     private byte[] _buffer = null;
 ```
 
@@ -275,3 +274,6 @@ After:
 ```java
 49         private byte[] password;
 ```
+
+## Appendix
+The reports from the tools, both before and after the bug fixes can be found inside the folder `assignments/1`.
