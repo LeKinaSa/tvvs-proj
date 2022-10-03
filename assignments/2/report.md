@@ -11,7 +11,7 @@
 
 These functions were selected mostly because they can easily be tested independently and are very different from one another, in terms of parameters.
 
-Selected package: `util`
+Selected package: `jpass.util`
 Selected functions:
 1. `DateUtils.formatIsoDateTime(String dateString, DateTimeFormatter formatter)`
     - Function definition
@@ -35,7 +35,13 @@ Selected functions:
             | invalid ISO format | ISO format |
             | null | ISO format |
     - Unit tests generated
-    - Unit tests outcome
+        | String `dateString` | DateTimeFormatter `formatter` | Expected Output | Outcome |
+        | --- | --- | --- | --- |
+        | "2022-10-03T01:00:00" | ISO_LOCAL_DATE_TIME | "2022-10-03T01:00:00" | Test passed |
+        | "2022-10-03T01:00:00" | ISO_LOCAL_DATE | "2022-10-03" | Test passed |
+        | "2022-10-03T01:00:00" | null | "1970-01-01T01:00:00" | Test failed (with NullPointerException) |
+        | "2022-10-03" | ISO_LOCAL_DATE_TIME | "1970-01-01T01:00:00" | Test passed |
+        | null | ISO_LOCAL_DATE_TIME | "1970-01-01T01:00:00" | Test passed |
 
 2. `StringUtils.stripNonValidXMLCharacters(final String in)`
     - Function definition
@@ -56,7 +62,13 @@ Selected functions:
             | string with only invalid XML characters |
             | string with both valid and invalid XML characters |
     - Unit tests generated
-    - Unit tests outcome
+        | String `in` | Expected Output | Outcome |
+        | --- | --- | --- |
+        | null | "" | Test failed (output was null) |
+        | "" | "" | Test passed |
+        | "abcdef" | "abcdef" | Test passed |
+        | "\u0012" | "?" | Test passed |
+        | "abc\u0012" | "abc?" | Test passed |
 
 3. `StringUtils.stripString(String text, int length)`
     - Function definition
@@ -82,7 +94,15 @@ Selected functions:
             | normal string | same as `text` length |
             | normal string | bigger than `text` length |
     - Unit tests generated
-    - Unit tests outcome
+        | String `text` | int `length` | Expected Output | Outcome |
+        | --- | --- | --- | --- |
+        | null | 3 | null | Test passed |
+        | "" | 3 | "" | Test passed |
+        | "" | 0 | "" | Test passed |
+        | "abcdef" | -1 | "" | Test failed (with StringIndexOutOfBoundsException) |
+        | "abcdef" | 3 | "abc..." | Test passed |
+        | "abcdef" | 6 | "abcdef" | Test passed |
+        | "abcdef" | 9 | "abcdef" | Test passed |
 
 4. `CryptUtils.getSha256Hash(final char[] text)`
     - Function definition
@@ -101,7 +121,11 @@ Selected functions:
             | empty |
             | normal array |
     - Unit tests generated
-    - Unit tests outcome
+        | char[] `text` | Expected Output | Outcome |
+        | --- | --- | --- |
+        | null | Exception thrown during execution | Test passed |
+        | {} | "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" | Test passed |
+        | {'a', 'b', 'c', 'd', 'd', 'e'} | "27410DDD3671EFF7BDE332C234EB3E3154F34FD2FFA34477EC61AB87F58BF4FE" | Test passed |
 
 5. `DateUtils.createFormatter(String format)`
     - Function definition
@@ -121,5 +145,10 @@ Selected functions:
             | invalid format |
             | valid format |
     - Unit tests generated
-    - Unit tests outcome
+        | String `format` | Expected Output | Outcome |
+        | --- | --- | --- |
+        | null | ISO_DATE | Test passed |
+        | "" | ISO_DATE | Test failed (TODO) |
+        | "q" | ISO_DATE | Test failed (TODO) |
+        | "HH:mm:ss" | ISO_LOCAL_TIME | Test failed (TODO) |
 

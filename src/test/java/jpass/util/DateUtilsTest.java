@@ -7,9 +7,10 @@ import java.time.format.DateTimeFormatter;
 import org.junit.Test;
 
 public class DateUtilsTest {
-    private static String EPOCH = "1970-01-01T01:00:00";
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    // public static DateTimeFormatter createFormatter(String format)                         //
+    ////////////////////////////////////////////////////////////////////////////////////////////
 
-    // public static DateTimeFormatter createFormatter(String format)
     @Test
     public void nullCreateFormatterTest() {
         DateTimeFormatter formatter = DateUtils.createFormatter(null);
@@ -44,7 +45,13 @@ public class DateUtilsTest {
         assertEquals(DateTimeFormatter.ISO_LOCAL_TIME, formatter);
     }
 
-    // public static String formatIsoDateTime(String dateString, DateTimeFormatter formatter)
+
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    // public static String formatIsoDateTime(String dateString, DateTimeFormatter formatter) //
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    
+    private static String EPOCH = "1970-01-01T01:00:00";
+
     @Test
     public void validISOFormatIsoDateTimeTest() {
         String validString = "2022-10-03T01:00:00";

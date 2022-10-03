@@ -15,7 +15,10 @@ import org.junit.Test;
 | normal string | bigger than `text` length |
  */
 public class StringUtilsTest {
-    // public static String stripNonValidXMLCharacters(final String in)
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    // public static String stripNonValidXMLCharacters(final String in)                       //
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
     @Test
     public void nullStripNonValidXMLCharactersTest() {
         String in = null;
@@ -35,21 +38,21 @@ public class StringUtilsTest {
     }
     
     @Test
-    public void invalidStripNonValidXMLCharactersTest() {
-        String in = "\u0012";
-
-        String result = StringUtils.stripNonValidXMLCharacters(in);
-
-        assertEquals("?", result);
-    }
-    
-    @Test
     public void validStripNonValidXMLCharactersTest() {
         String in = "abcdef";
 
         String result = StringUtils.stripNonValidXMLCharacters(in);
 
         assertEquals(in, result);
+    }
+    
+    @Test
+    public void invalidStripNonValidXMLCharactersTest() {
+        String in = "\u0012";
+
+        String result = StringUtils.stripNonValidXMLCharacters(in);
+
+        assertEquals("?", result);
     }
     
     @Test
@@ -61,7 +64,10 @@ public class StringUtilsTest {
         assertEquals("abc?", result);
     }
 
-    // public static String stripString(String text, int length)
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    // public static String stripString(String text, int length)                              //
+    ////////////////////////////////////////////////////////////////////////////////////////////
+
     @Test
     public void nullPositiveStripStringTest() {
         String text = null;
