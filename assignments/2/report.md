@@ -39,7 +39,7 @@ Selected functions:
 
 2. `StringUtils.stripNonValidXMLCharacters(final String in)`
     - Function definition
-        > Removes the invalid XML unicode characters from the input string (`in`). Should return an empty string if the input is null.
+        > Replaces invalid XML unicode characters with '?' from the input string (`in`). Should return an empty string if the input is null.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             - String `in`
@@ -84,28 +84,22 @@ Selected functions:
     - Unit tests generated
     - Unit tests outcome
 
-4. `CryptUtils.getSha256Hash(final char[] text, final int iteration)`
+4. `CryptUtils.getSha256Hash(final char[] text)`
     - Function definition
-        > Calculates the SHA-256 hash after performing `iteration` iterations.
+        > Calculates the `text`'s SHA-256 hash.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             - char[] `text`
-            - int `iteration`
         2. Characteristics of the parameters
             - char[] `text`: null, empty, normal array
-            - int `iteration`: negative, 0, 1, positive value (> 1)
         3. Constraints / Invalid Input
             - char[] `text`: null
-            - int `iteration`: negative, 0
         4. Combinations
-            | char[] `text` | int `iteration` |
-            | --- | --- |
-            | null | 1 |
-            | empty | 1 |
-            | normal array | negative |
-            | normal array | 0 |
-            | normal array | 1 |
-            | normal array | positive value (> 1) |
+            | char[] `text` |
+            | --- |
+            | null |
+            | empty |
+            | normal array |
     - Unit tests generated
     - Unit tests outcome
 

@@ -37,13 +37,11 @@ public class DateUtilsTest {
 
     @Test
     public void validFormatCreateFormatterTest() {
-        String formatString = "yyyy-MM-dd";
+        String formatString = "HH:mm:ss";
 
         DateTimeFormatter formatter = DateUtils.createFormatter(formatString);
 
-        System.out.println(formatter);
-
-        assertEquals(DateTimeFormatter.ISO_LOCAL_DATE, formatter);
+        assertEquals(DateTimeFormatter.ISO_LOCAL_TIME, formatter);
     }
 
     // public static String formatIsoDateTime(String dateString, DateTimeFormatter formatter)
