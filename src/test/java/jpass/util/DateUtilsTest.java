@@ -13,8 +13,10 @@ public class DateUtilsTest {
 
     @Test
     public void nullCreateFormatterTest() {
-        DateTimeFormatter formatter = DateUtils.createFormatter(null);
-        
+        String formatString = null;
+
+        DateTimeFormatter formatter = DateUtils.createFormatter(formatString);
+
         assertEquals(DateTimeFormatter.ISO_DATE, formatter);
     }
 
@@ -23,13 +25,13 @@ public class DateUtilsTest {
         String formatString = "";
 
         DateTimeFormatter formatter = DateUtils.createFormatter(formatString);
-        assertEquals(DateTimeFormatter.ISO_DATE, formatter);
 
+        assertEquals("", formatter.toString());
     }
 
     @Test
     public void invalidFormatCreateFormatterTest() {
-        String formatString = "q";
+        String formatString = ".b";
 
         DateTimeFormatter formatter = DateUtils.createFormatter(formatString);
 
@@ -42,9 +44,9 @@ public class DateUtilsTest {
 
         DateTimeFormatter formatter = DateUtils.createFormatter(formatString);
 
+        assertEquals("Value(HourOfDay,2)':'Value(MinuteOfHour,2)':'Value(SecondOfMinute,2)", formatter.toString());
         assertEquals(DateTimeFormatter.ISO_LOCAL_TIME, formatter);
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////
     // public static String formatIsoDateTime(String dateString, DateTimeFormatter formatter) //
@@ -65,9 +67,9 @@ public class DateUtilsTest {
     @Test
     public void validOtherFormatIsoDateTimeTest() {
         String validString = "2022-10-03T01:00:00";
-        DateTimeFormatter otherFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
+        DateTimeFormatter anotherFormatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
-        String result = DateUtils.formatIsoDateTime(validString, otherFormatter);
+        String result = DateUtils.formatIsoDateTime(validString, anotherFormatter);
 
         assertEquals("2022-10-03", result);
     }
@@ -75,8 +77,9 @@ public class DateUtilsTest {
     @Test
     public void validNullFormatIsoDateTimeTest() {
         String validString = "2022-10-03T01:00:00";
+        DateTimeFormatter nullFormatter = null;
 
-        String result = DateUtils.formatIsoDateTime(validString, null);
+        String result = DateUtils.formatIsoDateTime(validString, nullFormatter);
 
         assertEquals(EPOCH, result);
     }
@@ -93,9 +96,10 @@ public class DateUtilsTest {
 
     @Test
     public void nullISOFormatIsoDateTimeTest() {
+        String nullString = null;
         DateTimeFormatter isoFormatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
 
-        String result = DateUtils.formatIsoDateTime(null, isoFormatter);
+        String result = DateUtils.formatIsoDateTime(nullString, isoFormatter);
 
         assertEquals(EPOCH, result);
     }

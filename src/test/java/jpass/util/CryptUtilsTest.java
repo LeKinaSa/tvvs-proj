@@ -25,12 +25,14 @@ public class CryptUtilsTest {
     @Test
     public void nullGetSha256HashTest() {
         char[] text = null;
+
         try {
             CryptUtils.getSha256Hash(text);
         }
         catch (Exception e) {
             return;
         }
+        
         fail();
     }
 
@@ -41,6 +43,7 @@ public class CryptUtilsTest {
 
         try {
             byte[] results = CryptUtils.getSha256Hash(text);
+
             assertEquals(expected, bytesToHex(results));
         }
         catch (Exception e) {
@@ -50,11 +53,12 @@ public class CryptUtilsTest {
 
     @Test
     public void normalGetSha256HashTest() {
-        char[] text = {'a', 'b', 'c', 'd', 'd', 'e'};
-        String expected = "27410DDD3671EFF7BDE332C234EB3E3154F34FD2FFA34477EC61AB87F58BF4FE";
+        char[] text = {'a', 'b', 'c', 'd', 'e', 'f'};
+        String expected = "BEF57EC7F53A6D40BEB640A780A639C83BC29AC8A9816F1FC6C5C6DCD93C4721";
 
         try {
             byte[] results = CryptUtils.getSha256Hash(text);
+
             assertEquals(expected, bytesToHex(results));
         }
         catch (Exception e) {

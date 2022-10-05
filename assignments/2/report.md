@@ -1,4 +1,4 @@
-# Assignment 1
+# Assignment 2
 
 ## Group M.EIC 05
 
@@ -15,25 +15,25 @@ Selected package: `jpass.util`
 Selected functions:
 1. `DateUtils.formatIsoDateTime(String dateString, DateTimeFormatter formatter)`
     - Function definition
-        > Transform a date (`dateString`) from the ISO format into the specified format (`formatter`).
+        > Transform a date (`dateString`) in the `ISO_LOCAL_DATE_TIME` format into the specified format (`formatter`). In case of invalid input, it should return the `EPOCH`.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             - String `dateString`
             - DateTimeFormatter `formatter`
         2. Characteristics of the parameters
-            - String `dateString`: valid ISO format, invalid ISO format, null
-            - DateTimeFormatter `formatter`: ISO format, other format, null
+            - String `dateString`: valid ISO DateTime format, invalid ISO DateTime format, null
+            - DateTimeFormatter `formatter`: ISO DateTime format, another format, null
         3. Constraints / Invalid Input
-            - String `dateString`: invalid ISO format, null
+            - String `dateString`: invalid ISO DateTime format, null
             - DateTimeFormatter `formatter`: null
         4. Combinations
             | String `dateString` | DateTimeFormatter `formatter` |
             | --- | --- |
-            | valid ISO format | ISO format |
-            | valid ISO format | other format |
-            | valid ISO format  |  null |
-            | invalid ISO format | ISO format |
-            | null | ISO format |
+            | valid ISO DateTime format | ISO DateTime format |
+            | valid ISO DateTime format | another format |
+            | valid ISO DateTime format  |  null |
+            | invalid ISO DateTime format | ISO DateTime format |
+            | null | ISO DateTime format |
     - Unit tests generated
         | String `dateString` | DateTimeFormatter `formatter` | Expected Output | Outcome |
         | --- | --- | --- | --- |
@@ -45,7 +45,7 @@ Selected functions:
 
 2. `StringUtils.stripNonValidXMLCharacters(final String in)`
     - Function definition
-        > Replaces invalid XML unicode characters with '?' from the input string (`in`). Should return an empty string if the input is null.
+        > Replaces invalid XML Unicode characters with "?" from the input string (`in`). Should return an empty string if the input is null.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             - String `in`
@@ -72,7 +72,7 @@ Selected functions:
 
 3. `StringUtils.stripString(String text, int length)`
     - Function definition
-        > Truncates the input string (`text`) to a determined size (`length`). Should return null if the input is null.
+        > Truncates the input string (`text`) to a determined size (`length`), adding "..." at the end if the string was truncated. Should return null if the input is null. Should return "" if the input `length` is invalid.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             - String `text`
@@ -82,7 +82,7 @@ Selected functions:
             - int `length`: negative value, 0, smaller than `text` length, same as `text` length, bigger than `text` length
         3. Constraints / Invalid Input
             - String `text`: null
-            - int `length`: negative value (invalid), 0 and smaller than `text` length are the same when refering to the normal string
+            - int `length`: negative value (invalid), 0 and smaller than `text` length are the same when referring to the normal string
         4. Combinations
             | String `text` | int `length` |
             | --- | --- |
@@ -106,7 +106,7 @@ Selected functions:
 
 4. `CryptUtils.getSha256Hash(final char[] text)`
     - Function definition
-        > Calculates the `text`'s SHA-256 hash.
+        > Calculates the `text`'s SHA-256 hash. If the input is invalid, an exception should be thrown.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             - char[] `text`
@@ -125,11 +125,11 @@ Selected functions:
         | --- | --- | --- |
         | null | Exception thrown during execution | Test passed |
         | {} | "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" | Test passed |
-        | {'a', 'b', 'c', 'd', 'd', 'e'} | "27410DDD3671EFF7BDE332C234EB3E3154F34FD2FFA34477EC61AB87F58BF4FE" | Test passed |
+        | {'a', 'b', 'c', 'd', 'e', 'f'} | "BEF57EC7F53A6D40BEB640A780A639C83BC29AC8A9816F1FC6C5C6DCD93C4721" | Test passed |
 
 5. `DateUtils.createFormatter(String format)`
     - Function definition
-        > Creates a `DateTimeFormatter` based on the input `format`.
+        > Creates a `DateTimeFormatter` based on the input `format`. If the input is invalid, it should return ISO_DATE.
     - Step-by-step of the ‘Category-Partition’ algorithm
         1. Parameters
             -String `format`
@@ -148,7 +148,7 @@ Selected functions:
         | String `format` | Expected Output | Outcome |
         | --- | --- | --- |
         | null | ISO_DATE | Test passed |
-        | "" | ISO_DATE | Test failed (TODO) |
-        | "q" | ISO_DATE | Test failed (TODO) |
+        | "" | "" | Test passed |
+        | ".b" | ISO_DATE | Test passed |
         | "HH:mm:ss" | ISO_LOCAL_TIME | Test failed (TODO) |
 

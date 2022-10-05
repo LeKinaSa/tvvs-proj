@@ -3,17 +3,7 @@ package jpass.util;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
-/**
-| String `text` | int `length` |
-| ---           | --- |
-| null          | positive value |
-| empty string  | positive value |
-| empty string  | 0 |
-| normal string | negative value |
-| normal string | smaller than `text` length |
-| normal string | same as `text` length |
-| normal string | bigger than `text` length |
- */
+
 public class StringUtilsTest {
     ////////////////////////////////////////////////////////////////////////////////////////////
     // public static String stripNonValidXMLCharacters(final String in)                       //
