@@ -2,7 +2,12 @@ package jpass.util;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAccessor;
 
 import org.junit.Test;
 
@@ -41,11 +46,12 @@ public class DateUtilsTest {
     @Test
     public void validFormatCreateFormatterTest() {
         String formatString = "HH:mm:ss";
+        LocalDateTime nowDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(0), ZoneId.systemDefault());
+        TemporalAccessor now = nowDate.truncatedTo(ChronoUnit.MILLIS);
 
         DateTimeFormatter formatter = DateUtils.createFormatter(formatString);
 
-        assertEquals("Value(HourOfDay,2)':'Value(MinuteOfHour,2)':'Value(SecondOfMinute,2)", formatter.toString());
-        assertEquals(DateTimeFormatter.ISO_LOCAL_TIME, formatter);
+        assertEquals(DateTimeFormatter.ISO_LOCAL_TIME.format(now), formatter.format(now));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////

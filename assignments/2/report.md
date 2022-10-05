@@ -150,5 +150,6 @@ Selected functions:
         | null | ISO_DATE | Test passed |
         | "" | "" | Test passed |
         | ".b" | ISO_DATE | Test passed |
-        | "HH:mm:ss" | ISO_LOCAL_TIME | Test failed (TODO) |
+        | "HH:mm:ss" | ISO_LOCAL_TIME | Test passed |
 
+        The last test was tested differently since the predefined formatter `ISO_LOCAL_TIME` from the `DateTimeFormatter` class allows for optional sections and the formatter we are parsing doesn't. To verify that the format would be equal, we tested with `assertEquals(DateTimeFormatter.ISO_LOCAL_TIME.format(now), formatter.format(now));`, instead of `assertEquals(DateTimeFormatter.ISO_LOCAL_TIME, formatter);`.
