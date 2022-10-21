@@ -149,6 +149,9 @@ Selected functions:
             - Invalid
                 - String `text`: null
                 - int `length`: length < 0
+            
+            ![Graphical representation of the equivalence classes](strip_string_classes.png) \
+            Graphical representation of the equivalence classes
         4. Class boundaries
             - Boundary **negative**
                 - Boundary between

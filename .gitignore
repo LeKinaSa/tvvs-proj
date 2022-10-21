@@ -45,3 +45,5 @@ nbdist/
 nb-configuration.xml
 /.idea/
 /.vscode/
+
+*.pdf
