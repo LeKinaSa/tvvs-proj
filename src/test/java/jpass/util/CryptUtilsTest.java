@@ -65,4 +65,18 @@ public class CryptUtilsTest {
             fail();
         }
     }
+
+    @Test
+    public void offPoint1GetSha256HashTest() {
+        char[] text = {'a'};
+        String expected = "CA978112CA1BBDCAFAC231B39A23DC4DA786EFF8147C4E72B9807785AFEE48BB";
+
+        try {
+            byte[] results = CryptUtils.getSha256Hash(text);
+            assertEquals(expected, bytesToHex(results));
+        }
+        catch (Exception e) {
+            fail();
+        }
+    }
 }

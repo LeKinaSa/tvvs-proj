@@ -61,15 +61,24 @@ Selected functions:
                 - on-point: "a\u0012"
                 - off-point: "a" and "\u0012" and null
         5. Testing strategy
+            - We will tests the boundaries and one point inside each class
+                - Class **null**: null
+                - Class **empty**: ""
+                - Class **non-empty with only valid characters**: "abcdef"
+                - Class **non-empty with only invalid characters**: "\u0012\u0012"
+                - Class **non-empty with valid and invalid characters**: "abc\u0012"
             - There are redundant tests, so these will only be tested once
     - Unit tests generated
-        | char[] `text` | Expected Output | Outcome |
-        | --- | --- | --- |
-        | null      | ""   |  |
-        | ""        | ""   |  |
-        | "a"       | "a"  |  |
-        | "\u0012"  | "?"  |  |
-        | "a\u0012" | "a?" |  |
+        | char[] `text`  | Expected Output | Outcome                       |
+        | ---            | ---             | ---                           |
+        | null           | ""              | Test failed (output was null) |
+        | ""             | ""              | Test passed                   |
+        | "a"            | "a"             | Test passed                   |
+        | "\u0012"       | "?"             | Test passed                   |
+        | "a\u0012"      | "a?"            | Test passed                   |
+        | "abcdef"       | "abcdef"        | Test passed                   |
+        | "\u0012\u0012" | "??"            | Test passed                   |
+        | "abc\u0012"    | "abc?"          | Test passed                   |
 
 2. `CryptUtils.getSha256Hash(final char[] text)`
     - Function definition
@@ -108,17 +117,22 @@ Selected functions:
                 - on-point: {'a'}
                 - off-point: {} and null
         5. Testing strategy
+            - We will tests the boundaries and one point inside each class
+                - Class **null**: null
+                - Class **empty**: {}
+                - Class **non-empty**: {'a', 'b', 'c', 'd', 'e', 'f'}
             - There are redundant tests, so these will only be tested once
     - Unit tests generated
-        | char[] `text` | Expected Output | Outcome |
-        | --- | --- | --- |
-        | null | Exception thrown during execution | Test passed |
-        | {} | "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" | Test passed |
-        | {'a'} | "CA978112CA1BBDCAFAC231b39A23DC4dA786EFF8147C4E72B9807785AFEE48BB" | Test passed |
+        | char[] `text`                  | Expected Output                                                    | Outcome     |
+        | ---                            | ---                                                                | ---         |
+        | null                           | Exception thrown during execution                                  | Test passed |
+        | {}                             | "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855" | Test passed |
+        | {'a'}                          | "CA978112CA1BBDCAFAC231B39A23DC4DA786EFF8147C4E72B9807785AFEE48BB" | Test passed |
+        | {'a', 'b', 'c', 'd', 'e', 'f'} | "BEF57EC7F53A6D40BEB640A780A639C83BC29AC8A9816F1FC6C5C6DCD93C4721" | Test passed |
 
 3. `StringUtils.stripString(String text, int length)`
     - Function definition
-        > Truncates the input string (`text`) to a determined size (`length`), adding "..." at the end if the string was truncated. Should return null if the input is null. Should return "" if the input `length` is invalid.
+        > Truncates the input string (`text`) to a determined size (`length`), adding "..." at the end if the string was truncated. Should return null if the input `text` is null. Should return "" if the input `length` is invalid.
     - Step-by-step of the ‘Boundary Value Analysis’ algorithm
         1. Input and output variables (types and ranges)
             - Input
@@ -130,7 +144,7 @@ Selected functions:
             - the ouput string's length will be equal to the input string's length if that length is lower or equal to `length`, otherwise it will be `length` + 3
         3. Equivalent class analysis
             - Valid
-                - String `text`: null, empty, non-empty with length smaller or equal to `length` and non-empty with length bigger than `length`
+                - String `text`: empty, non-empty with length smaller or equal to `length` and non-empty with length bigger than `length`
                 - int `length`: length >= 0
             - Invalid
                 - String `text`: null
@@ -173,16 +187,24 @@ Selected functions:
                 - on-point: `text`="a" and `length`=1
                 - off-point: `text`="ab" and `length`=1
         5. Testing strategy
-            - There are redundant tests, so these will only be tested once
+            - We will tests the boundaries and one point inside each class
+                - Class **null**( `text` = null ) and Class **negative**( `length` = -1 ) will only have 1 test each
+                - Class **empty**: "" & 3
+                - Class **length of `text` smaller or equal to `length`**: "abcdef" & 9
+                - Class **length of `text` bigger than `length`**: "abcdef" & 3
             - Invalid inputs are only tested once (with valid partitions)
+            - There are redundant tests, so these will only be tested once
            
     - Unit tests generated
-        | String `text` | int `length` | Expected Output | Outcome |
-        | ---  | --- |   ---   | --- |
-        | null | 1   |  null   |     |
-        | ""   | -1  |  "..."? | Test failed (with StringIndexOutOfBoundsException) |
-        | ""   | 0   |  ""     |     |
-        | ""   | 1   |  ""     |     |
-        | "a"  | 0   |  "..."  |     |
-        | "a"  | 1   |  "a"    |     |
-        | "ab" | 1   |  "a..." |     |
+        | String `text` | int `length` | Expected Output | Outcome                                            |
+        | ---           | ---          |   ---           | ---                                                |
+        | null          | 0            |  null           | Test passed                                        |
+        | ""            | -1           |  "..."          | Test failed (with StringIndexOutOfBoundsException) |
+        | ""            | 0            |  ""             | Test passed                                        |
+        | ""            | 1            |  ""             | Test passed                                        |
+        | ""            | 3            |  ""             | Test passed                                        |
+        | "a"           | 0            |  "..."          | Test passed                                        |
+        | "a"           | 1            |  "a"            | Test passed                                        |
+        | "ab"          | 1            |  "a..."         | Test passed                                        |
+        | "abcdef"      | 3            | "abc..."        | Test passed                                        |
+        | "abcdef"      | 9            | "abcdef"        | Test passed                                        |
