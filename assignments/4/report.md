@@ -26,7 +26,7 @@ Verifying that these utilities are working correctly using only unit tests can b
 
 #### Transition table
 
-For ease of representation, the states, events and conditions will be abbreviated as representated in the following tables:
+For ease of representation, the states, events and conditions will be abbreviated as represented in the following tables:
 
 | State                      | Abbreviation |
 | ---                        | ---          |
@@ -68,7 +68,7 @@ Transition Table
 #### Test description
 
 * These tests require an initialization since they need at least one entry.
-    * One password entry will be introduced when setting up for these tests.
+    * One password entry will be introduced when setting up these tests.
         |           |                      |
         | ---       | ---                  |
         | Title     | `TestEntry`          |
@@ -293,7 +293,14 @@ After introducing the password in the application, the user will want to search 
     * End: Main window (With filled in search bar)
 
 #### Test outcome
+All the tests were implemented.
+However, we were not able to define asserts to define if the search bar was open or not, as it appeared visible either way.
+Because of that, none of the tests contain an initial verification, asserting that the initial state is indeed the Main window (No search bar).
+Also, most of the tests don't contain a final assertion, verifying that they indeed reached the final state, again the Main window (No search bar).
+Only tests 3, 5 and 7 contain the final assert passing it.
 
+Since the application just started, it is in the correct state. However, if the code were to change and that window stopped being the initial window,
+the tests wouldn't notice it. They may or may not fail at the last assert (in the cases where it exists), but it wouldn't be guaranteed and it would cause confusion since the problem wouldn't be where the test fails (the last state) but rather in the initial state.
 
 ### Create a password entry / CRUD
 
@@ -308,7 +315,7 @@ Managing password entries is a critical functionality of this project. It's ther
 ![Transition Tree Add](img/add_tree.svg)
 
 #### Transition table
-For ease of representation, the states, events and conditions will be abbreviated as representated in the following tables:
+For ease of representation, the states, events and conditions will be abbreviated as represented in the following tables:
 
 | State                                                    | Abbreviation |
 | ---                                                      | ---          |
@@ -344,8 +351,8 @@ For ease of representation, the states, events and conditions will be abbreviate
 
 Transition Table
 
-| Origin State | AddNew   | X        | Ok       | Cancel   | OK[V] | OK[I]     | Copy     | Generate1 | Generate2 | Show     | Accept[F] | Accept[E] |
-|--------------|----------|----------|----------|----------|-------|-----------|----------|-----------|-----------|----------|-----------|-----------|
+| Origin State  | AddNew   | X        | Ok       | Cancel   | OK[V] | OK[I]     | Copy     | Generate1 | Generate2 | Show     | Accept[F] | Accept[E] |
+|-------------- |----------|----------|----------|----------|-------|-----------|----------|-----------|-----------|----------|-----------|-----------|
 | **Main**      | AddInvis | -        | -        | -        | -     | -         | -        | -         | -         | -        | -         | -         |
 | **AddInvis**  | -        | Main     | -        | Main     | Main  | WAddInvis | AddInvis | GenInvis  | -         | AddVis   | -         | -         |
 | **WAddInvis** | -        | AddInvis | AddInvis | -        | -     | -         | -        | -         | -         | -        | -         | -         |
@@ -357,6 +364,8 @@ Transition Table
 | **WGenVis**   | -        | GenVis   | GenVis   | -        | -     | -         | -        | -         | -         | -        | -         | -         |
 
 #### Test description
+Every Test must verify that step 1 opens the "Add New Entry" Window
+
 * Test 0
     * Start: "JPass Password Manager" Window
     * Steps
@@ -373,15 +382,113 @@ Transition Table
     * Start: "JPass Password Manager" Window
     * Steps
         1. Press "Add New..." Button
-        2. Press "Copy" Button
+        2. Press "OK" without filling out the form
+        3. Press "Ok"
+    * End: "Add New Entry" Window (Password & Repeat invisible)
+    * Must verify that step 2 opens the "Warning" Window
+* Test 3
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Generate" Button ("Add New Entry" Window)
+        3. Press "Generate" Button ("Generate Password" Window)
+    * End: "Generate Password" Window (Password & Repeat invisible)
+    * Must verify that step 2 opens the "Generate Password" Window
+* Test 4
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Generate" Button ("Add New Entry" Window)
+        3. Press "Accept" Button
+        4. Press "Ok"
+    * End: "Generate Password" Window (Password & Repeat invisible)
+    * Must verify that step 2 opens the "Generate Password" Window
+    * Must verify that step 3 opens the "Warning" Window
+* Test 5
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Generate" Button ("Add New Entry" Window)
+        3. Press "X" Button
+    * End: "Add New Entry" Window (Password & Repeat invisible)
+    * Must verify that step 2 opens the "Generate Password" Window
+* Test 6
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "X" Button
+    * End: "JPass Password Manager" Window
+* Test 7
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "Copy" Button
+    * End: "Add New Entry" Window (Password & Repeat visible)
+* Test 8
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "OK" without filling out the form
+        4. Press "Ok"
+    * End: "Add New Entry" Window (Password & Repeat visible)
+    * Must verify that step 3 opens the "Warning" Window
+* Test 9
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "Generate" Button ("Add New Entry" Window)
+        4. Press "Generate" Button ("Generate Password" Window)
+    * End: "Generate Password" Window (Password & Repeat visible)
+    * Must verify that step 3 opens the "Generate Password" Window
+* Test 10
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "Generate" Button ("Add New Entry" Window)
+        4. Press "Accept" Button
+        5. Press "Ok"
+    * End: "Generate Password" Window (Password & Repeat visible)
+    * Must verify that step 3 opens the "Generate Password" Window
+    * Must verify that step 4 opens the "Warning" Window
+* Test 11
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "Generate" Button ("Add New Entry" Window)
+        4. Press "X" Button
+    * End: "Add New Entry" Window (Password & Repeat visible)
+    * Must verify that step 3 opens the "Generate Password" Window
+* Test 12
+    * Start: "JPass Password Manager" Window
+    * Steps
+        1. Press "Add New..." Button
+        2. Press "Show" Button
+        3. Press "Show" Button
     * End: "Add New Entry" Window (Password & Repeat invisible)
 
-
 #### Test outcome
+All the tests passed.
 
+### Sneak paths
+
+The sneak paths we chose to test are all related to the search functionality because this functionality isn't immediately available on program launch:
+
+1. Select the search bar (when the bar isn't present)
+
+2. Input text into the search bar (when the bar isn't present)
+
+3. Close the search bar (when the bar isn't present)
+
+All these tests failed with the Exception `Excepted by ComponentNotFoundException` since the bar is not present.
 
 ### QF-Test Feedback
 
 We felt that the QF-Test tool is pretty good and the installation process was straightforward. We didn't manage to add the tool to `PATH` with the setup tool, so we resorted to finding the executable in the project's files and executing it using the terminal. We feel that this part of the user experience could be improved upon.
 
-The tool felt very intuitive to use.
+The tool felt very intuitive to use. However, we could not figure out how to check if the search bar was invisible since the variable `visible` still appeared as `true` even when there was no bar on the screen.
