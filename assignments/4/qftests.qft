@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE RootStep>
 <RootStep id="_0" name="root"
-          signature="3A9CFAE065D3DCFF3371C2922B2808EBF553F47F"
+          signature="21F9B4E92BB53C38C00939AD04938AA466E50092"
           version="6.0.3">
   <include>qfs.qft</include>
   <TestSet id="_We" name="sneak-paths">
@@ -1055,11 +1055,6 @@
                         component="frameUntitled_-_JPass_Password_Manager.panel"
                         event="MOUSE_MPRC" id="_SY" modifiers="16" x="163"
                         y="127"/>
-      </BasicSequence>
-      <BasicSequence id="_aj" name="AssertNoBar">
-        <CheckBooleanStep checktype="visible" client="$(client)"
-                          component="frameUntitled_-_JPass_Password_Manager.panel2"
-                          id="_ak" state="false"/>
       </BasicSequence>
     </TestCase>
     <TestCase id="_RV" name="find 1">
