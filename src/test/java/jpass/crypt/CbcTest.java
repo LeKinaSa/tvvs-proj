@@ -178,4 +178,48 @@ public class CbcTest {
 
         Assert.assertTrue(Arrays.equals(data, _decrypted.toByteArray()));
     }
+
+    @Test
+    public void encryptDataNullTest() {
+        byte[] _encryptedBefore = _encrypted.toByteArray();
+        try {
+            _encrypt.encrypt(null);
+        } catch (IOException ignored) {}
+        byte[] _encryptedAfter = _encrypted.toByteArray();
+
+        Assert.assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
+    }
+
+    @Test
+    public void encryptDataNullWithLengthZeroTest() {
+        byte[] _encryptedBefore = _encrypted.toByteArray();
+        try {
+            _encrypt.encrypt(null, 0);
+        } catch (IOException ignored) {}
+        byte[] _encryptedAfter = _encrypted.toByteArray();
+
+        Assert.assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
+    }
+
+    @Test
+    public void decryptDataNullTest() {
+        byte[] _decryptedBefore = _decrypted.toByteArray();
+        try {
+            _decrypt.decrypt(null);
+        } catch (IOException ignored) {}
+        byte[] _decryptedAfter = _decrypted.toByteArray();
+
+        Assert.assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
+    }
+
+    @Test
+    public void decryptDataNullWithLengthZeroTest() {
+        byte[] _decryptedBefore = _decrypted.toByteArray();
+        try {
+            _decrypt.decrypt(null, 0);
+        } catch (IOException ignored) {}
+        byte[] _decryptedAfter = _decrypted.toByteArray();
+
+        Assert.assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
+    }
 }

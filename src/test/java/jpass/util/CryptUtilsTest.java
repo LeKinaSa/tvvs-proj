@@ -79,4 +79,19 @@ public class CryptUtilsTest {
             fail();
         }
     }
+
+    ///
+    @Test
+    public void thousandIterationsGetPKCS5Sha256HashTest() {
+        char[] text = {};
+        String expected = "0DC9B0E0900F0CE71F36C359CBCF968D6366F2762F5699A2F5EA5FDCCB70F0C8";
+
+        try {
+            byte[] results = CryptUtils.getPKCS5Sha256Hash(text);
+            assertEquals(expected, bytesToHex(results));
+        }
+        catch (Exception e) {
+            fail();
+        }
+    }
 }
