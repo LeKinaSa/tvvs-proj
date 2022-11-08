@@ -47,3 +47,4 @@ nb-configuration.xml
 /.vscode/
 
 *.pdf
+*_test_file.txt
