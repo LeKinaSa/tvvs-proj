@@ -156,6 +156,9 @@
                     </rulesets>
                 </configuration>
             </plugin>
+
+            <!-- JaCoCo library -->
+            
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -175,6 +178,16 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            jpass/ui/**/*
+                        </exclude>
+                        <exclude>
+                            jpass/util/SpringUtilities.class
+                        </exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>

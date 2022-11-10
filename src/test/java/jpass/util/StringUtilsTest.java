@@ -9,14 +9,14 @@ public class StringUtilsTest {
     // public static String stripNonValidXMLCharacters(final String in)                       //
     ////////////////////////////////////////////////////////////////////////////////////////////
 
-    // @Test
-    // public void nullStripNonValidXMLCharactersTest() {
-    //     String in = null;
+    @Test
+    public void nullStripNonValidXMLCharactersTest() {
+        String in = null;
 
-    //     String result = StringUtils.stripNonValidXMLCharacters(in);
+        String result = StringUtils.stripNonValidXMLCharacters(in);
 
-    //     assertEquals("", result);
-    // }
+        assertEquals("", result);
+    }
     
     @Test
     public void emptyStripNonValidXMLCharactersTest() {
@@ -115,15 +115,15 @@ public class StringUtilsTest {
         assertEquals(text, result);
     }
 
-    // @Test
-    // public void normalNegativeStripStringTest() {
-    //     String text = "abcdef";
-    //     int length = -1;
+    @Test
+    public void normalNegativeStripStringTest() {
+        String text = "abcdef";
+        int length = -1;
 
-    //     String result = StringUtils.stripString(text, length);
+        String result = StringUtils.stripString(text, length);
 
-    //     assertEquals("...", result);
-    // }
+        assertEquals("...", result);
+    }
 
     @Test
     public void normalSmallerStripStringTest() {
@@ -165,15 +165,15 @@ public class StringUtilsTest {
         assertEquals(text, result);
     }
 
-    // @Test
-    // public void boundaryNegativeStripStringTest() {
-    //     String text = "";
-    //     int length = -1;
+    @Test
+    public void boundaryNegativeStripStringTest() {
+        String text = "";
+        int length = -1;
 
-    //     String result = StringUtils.stripString(text, length);
+        String result = StringUtils.stripString(text, length);
 
-    //     assertEquals("...", result);
-    // }
+        assertEquals("...", result);
+    }
 
     @Test
     public void boundaryEmptyStripStringTest() {

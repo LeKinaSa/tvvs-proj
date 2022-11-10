@@ -80,15 +80,15 @@ public class DateUtilsTest {
         assertEquals("2022-10-03", result);
     }
 
-    // @Test
-    // public void validNullFormatIsoDateTimeTest() {
-    //     String validString = "2022-10-03T01:00:00";
-    //     DateTimeFormatter nullFormatter = null;
+    @Test
+    public void validNullFormatIsoDateTimeTest() {
+        String validString = "2022-10-03T01:00:00";
+        DateTimeFormatter nullFormatter = null;
 
-    //     String result = DateUtils.formatIsoDateTime(validString, nullFormatter);
+        String result = DateUtils.formatIsoDateTime(validString, nullFormatter);
 
-    //     assertEquals(EPOCH, result);
-    // }
+        assertEquals(EPOCH, result);
+    }
 
     @Test
     public void invalidISOFormatIsoDateTimeTest() {

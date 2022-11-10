@@ -10,9 +10,24 @@
 ## White-box testing: Structural Testing
 
 ### Code Coverage from the Tests from Assignment 2 and 3
-When collecting line and branch coverage for the tests developed for assignment 2 and 3, we had to ignore the results for the tests with the command `mvn test -DskipTests` since some of those tests resulted in a failure. This command allows us to skip the test cases when building, so JaCoCo can run after and generate its report.
+When collecting line and branch coverage for the tests developed for assignment 2 and 3, we had to generate the report using `mvn jacoco:report` since some of the tests resulted in a failure.
 
-After running, the JaCoCo *framework* presented the following result, not achieving the desired 100% line and branch coverage for all packages except `ui`.
+We removed classes related to the `ui` by inserting the following configuration in the JaCoCo plugin:
+
+```xml
+<configuration>
+    <excludes>
+        <exclude>
+            jpass/ui/**/*
+        </exclude>
+        <exclude>
+            jpass/util/SpringUtilities.class
+        </exclude>
+    </excludes>
+</configuration>
+```
+
+After running, the JaCoCo presented the following result, not achieving the desired 100% line and branch coverage.
 
 ![JaCoCo Before](img/jacoco_before.png)
 
@@ -35,6 +50,6 @@ In this case, we copied the test `shouldDecryptAnEncryptedRandomMessage` and mod
 
 
 ### Code Coverage after implementing more tests
-Once again, we run the command `mvn test -DskipTests` to skip the tests during the build phase and be able to run JaCoCo and generate its report.
+Once again, we run the command `mvn test && mvn jacoco:report` to run the tests and generate the JaCoCo report.
 
 ![JaCoCo After](img/jacoco_after.png)
