@@ -1,8 +1,10 @@
 package jpass.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
@@ -56,14 +58,14 @@ public class EntriesRepositoryTest {
     @Test
     public void noKeyTest() {
         Entries entries = getTestEntries();
-        String filename = "no_key_test_file.txt";
+        String filename = "src/test/res/no_key_test_file.txt";
 
         EntriesRepository repo = EntriesRepository.newInstance(filename);
         try {
             repo.writeDocument(entries);
         }
         catch (DocumentProcessException | IOException e) {
-            fail();
+            fail(e.getMessage());
         }
 
         Entries result = null;
@@ -71,7 +73,7 @@ public class EntriesRepositoryTest {
             result = repo.readDocument();
         }
         catch (DocumentProcessException | IOException e) {
-            fail();
+            fail(e.getMessage());
         }
 
         assertEquals(entries.getEntry().size(), result.getEntry().size());
@@ -86,7 +88,7 @@ public class EntriesRepositoryTest {
     @Test
     public void keyTest() {
         Entries entries = getTestEntries();
-        String filename = "key_test_file.txt";
+        String filename = "src/test/res/key_test_file.txt";
         byte[] key = "oooo0000oooo0000oooo0000oooo0000".getBytes();
 
         EntriesRepository repo = EntriesRepository.newInstance(filename, key);
@@ -94,8 +96,7 @@ public class EntriesRepositoryTest {
             repo.writeDocument(entries);
         }
         catch (DocumentProcessException | IOException e) {
-            System.out.println(e.getMessage());
-            fail();
+            fail(e.getMessage());
         }
 
         Entries result = null;
@@ -103,7 +104,7 @@ public class EntriesRepositoryTest {
             result = repo.readDocument();
         }
         catch (DocumentProcessException | IOException e) {
-            fail();
+            fail(e.getMessage());
         }
 
         assertEquals(entries.getEntry().size(), result.getEntry().size());
@@ -113,5 +114,39 @@ public class EntriesRepositoryTest {
             Entry actual = entries.getEntry().get(i);
             assertEquals(expected, actual);
         }
+    }
+
+    @Test
+    public void noFileTest() {
+        String filename = "src/test/res/not_a_file.txt";
+        EntriesRepository repo = EntriesRepository.newInstance(filename);
+
+        try {
+            repo.readDocument();
+        }
+        catch (DocumentProcessException | IOException e) {
+            assertEquals(FileNotFoundException.class, e.getClass());
+            assertNotNull(e.getMessage());
+            return;
+        }
+
+        fail("No exception thrown.");
+    }
+
+    @Test
+    public void incorrectFileTest() {
+        String filename = "src/test/res/bad_file.txt";
+        EntriesRepository repo = EntriesRepository.newInstance(filename);
+
+        try {
+            repo.readDocument();
+        }
+        catch (DocumentProcessException | IOException e) {
+            assertNotNull(e.getMessage());
+            return;
+        }
+
+        fail("No exception thrown.");
+
     }
 }

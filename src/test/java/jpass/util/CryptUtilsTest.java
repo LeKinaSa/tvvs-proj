@@ -33,7 +33,7 @@ public class CryptUtilsTest {
             return;
         }
         
-        fail();
+        fail("No exception thrown.");
     }
 
     @Test
@@ -47,7 +47,7 @@ public class CryptUtilsTest {
             assertEquals(expected, bytesToHex(results));
         }
         catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class CryptUtilsTest {
             assertEquals(expected, bytesToHex(results));
         }
         catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 
@@ -76,7 +76,7 @@ public class CryptUtilsTest {
             assertEquals(expected, bytesToHex(results));
         }
         catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 
@@ -91,7 +91,7 @@ public class CryptUtilsTest {
             assertEquals(expected, bytesToHex(results));
         }
         catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 }

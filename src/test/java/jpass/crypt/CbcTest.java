@@ -194,11 +194,26 @@ public class CbcTest {
         assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
     }
 
-    @Test
-    public void encryptDataNullWithLengthZeroTest() {
+    
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1})
+    public void encryptDataNullWithDiffLengthTest(int length) {
         byte[] _encryptedBefore = _encrypted.toByteArray();
         try {
-            _encrypt.encrypt(null, 0);
+            _encrypt.encrypt(null, length);
+        } catch (IOException ignored) {}
+        byte[] _encryptedAfter = _encrypted.toByteArray();
+
+        assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1})
+    public void encryptDataNotNullWithDiffLengthTest(int length) {
+        byte[] _encryptedBefore = _encrypted.toByteArray();
+        byte[] data = {0x00, 0x00};
+        try {
+            _encrypt.encrypt(data, length);
         } catch (IOException ignored) {}
         byte[] _encryptedAfter = _encrypted.toByteArray();
 

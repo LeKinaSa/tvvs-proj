@@ -17,10 +17,11 @@ public class ClipboardUtilsTest {
             assertEquals(text1, ClipboardUtils.getClipboardContent());
             ClipboardUtils.setClipboardContent(null);
             assertNull(ClipboardUtils.getClipboardContent());
-
+            ClipboardUtils.setClipboardContent("");
+            assertNull(ClipboardUtils.getClipboardContent());
         }
         catch (Exception e) {
-            fail();
+            fail(e.getMessage());
         }
     }
 }

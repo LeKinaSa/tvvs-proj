@@ -69,4 +69,12 @@ public class ConfigurationTest {
 
         assertEquals((Integer) 10, integer);
     }
+
+    @Test
+    public void valueNullTest() {
+        Configuration config = Configuration.getInstance();
+        Integer integer = config.getInteger("not.found", 0);
+
+        assertEquals((Integer) 0, integer);
+    }
 }
