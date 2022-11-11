@@ -1,6 +1,7 @@
 package jpass.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
@@ -26,14 +27,7 @@ public class CryptUtilsTest {
     public void nullGetSha256HashTest() {
         char[] text = null;
 
-        try {
-            CryptUtils.getSha256Hash(text);
-        }
-        catch (Exception e) {
-            return;
-        }
-        
-        fail("No exception thrown.");
+        assertThrows(Exception.class, () -> CryptUtils.getPKCS5Sha256Hash(text));
     }
 
     @Test

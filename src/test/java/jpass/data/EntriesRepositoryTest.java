@@ -1,7 +1,7 @@
 package jpass.data;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.FileNotFoundException;
@@ -120,17 +120,8 @@ public class EntriesRepositoryTest {
     public void noFileTest() {
         String filename = "src/test/res/not_a_file.txt";
         EntriesRepository repo = EntriesRepository.newInstance(filename);
-
-        try {
-            repo.readDocument();
-        }
-        catch (DocumentProcessException | IOException e) {
-            assertEquals(FileNotFoundException.class, e.getClass());
-            assertNotNull(e.getMessage());
-            return;
-        }
-
-        fail("No exception thrown.");
+        
+        assertThrows(FileNotFoundException.class, () -> repo.readDocument());
     }
 
     @Test
@@ -138,15 +129,6 @@ public class EntriesRepositoryTest {
         String filename = "src/test/res/bad_file.txt";
         EntriesRepository repo = EntriesRepository.newInstance(filename);
 
-        try {
-            repo.readDocument();
-        }
-        catch (DocumentProcessException | IOException e) {
-            assertNotNull(e.getMessage());
-            return;
-        }
-
-        fail("No exception thrown.");
-
+        assertThrows(IOException.class, () -> repo.readDocument());
     }
 }
