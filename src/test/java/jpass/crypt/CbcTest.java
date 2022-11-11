@@ -10,6 +10,8 @@ import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Unit test for the CBC encryption. The test data will be encrypted and decrypted. The results will
@@ -214,11 +216,25 @@ public class CbcTest {
         assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
     }
 
-    @Test
-    public void decryptDataNullWithLengthZeroTest() {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1})
+    public void decryptDataNullWithDiffLengthTest(int length) {
         byte[] _decryptedBefore = _decrypted.toByteArray();
         try {
-            _decrypt.decrypt(null, 0);
+            _decrypt.decrypt(null, length);
+        } catch (IOException ignored) {}
+        byte[] _decryptedAfter = _decrypted.toByteArray();
+
+        assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 1})
+    public void decryptDataNotNullWithDiffLengthTest(int length) {
+        byte[] _decryptedBefore = _decrypted.toByteArray();
+        byte[] data = {0x00, 0x00};
+        try {
+            _decrypt.decrypt(data, length);
         } catch (IOException ignored) {}
         byte[] _decryptedAfter = _decrypted.toByteArray();
 
