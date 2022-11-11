@@ -1,13 +1,17 @@
 package jpass.crypt;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Unit test for the CBC encryption. The test data will be encrypted and decrypted. The results will
@@ -50,7 +54,7 @@ public class CbcTest {
     /**
      * Sets the encryption and decryption instances up.
      */
-    @Before
+    @BeforeEach
     public void setUp() {
         byte[] iv = {(byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
             (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00, (byte) 0x00,
@@ -80,7 +84,7 @@ public class CbcTest {
         _decrypt.decrypt(_encrypted.toByteArray());
         _decrypt.finishDecryption();
 
-        Assert.assertTrue(Arrays.equals(source, _decrypted.toByteArray()));
+        assertTrue(Arrays.equals(source, _decrypted.toByteArray()));
     }
 
     /**
@@ -99,9 +103,9 @@ public class CbcTest {
         _decrypt.finishDecryption();
 
         byte[] d = _decrypted.toByteArray();
-        Assert.assertEquals(3000, d.length);
+        assertEquals(3000, d.length);
         for (int i = 0; i < d.length; ++i) {
-            Assert.assertEquals(0x81, d[i] & 0xff);
+            assertEquals(0x81, d[i] & 0xff);
         }
     }
 
@@ -144,13 +148,13 @@ public class CbcTest {
         encrypt.encrypt(plain);
         encrypt.finishEncryption();
 
-        Assert.assertEquals(expected.length, _encrypted.toByteArray().length);
-        Assert.assertTrue(Arrays.equals(expected, _encrypted.toByteArray()));
+        assertEquals(expected.length, _encrypted.toByteArray().length);
+        assertTrue(Arrays.equals(expected, _encrypted.toByteArray()));
 
         decrypt.decrypt(_encrypted.toByteArray());
         decrypt.finishDecryption();
 
-        Assert.assertTrue(Arrays.equals(plain, _decrypted.toByteArray()));
+        assertTrue(Arrays.equals(plain, _decrypted.toByteArray()));
     }
 
     /**
@@ -176,7 +180,7 @@ public class CbcTest {
         _decrypt.decrypt(_encrypted.toByteArray());
         _decrypt.finishDecryption();
 
-        Assert.assertTrue(Arrays.equals(data, _decrypted.toByteArray()));
+        assertTrue(Arrays.equals(data, _decrypted.toByteArray()));
     }
 
     @Test
@@ -187,7 +191,7 @@ public class CbcTest {
         } catch (IOException ignored) {}
         byte[] _encryptedAfter = _encrypted.toByteArray();
 
-        Assert.assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
+        assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
     }
 
     @Test
@@ -198,7 +202,7 @@ public class CbcTest {
         } catch (IOException ignored) {}
         byte[] _encryptedAfter = _encrypted.toByteArray();
 
-        Assert.assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
+        assertTrue(Arrays.equals(_encryptedBefore, _encryptedAfter));
     }
 
     @Test
@@ -209,7 +213,7 @@ public class CbcTest {
         } catch (IOException ignored) {}
         byte[] _decryptedAfter = _decrypted.toByteArray();
 
-        Assert.assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
+        assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
     }
 
     @ParameterizedTest
@@ -234,6 +238,6 @@ public class CbcTest {
         } catch (IOException ignored) {}
         byte[] _decryptedAfter = _decrypted.toByteArray();
 
-        Assert.assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
+        assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
     }
 }

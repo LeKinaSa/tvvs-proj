@@ -1,13 +1,15 @@
 package jpass.crypt.io;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests {@link jpass.crypt.io.CryptInputStream} and {@link jpass.crypt.io.CryptOutputStream}. A
@@ -63,8 +65,8 @@ public class StreamTest {
         decrypted.close();
         decrypter.close();
 
-        Assert.assertEquals(plain.length, decrypted.toByteArray().length);
-        Assert.assertTrue(Arrays.equals(plain, decrypted.toByteArray()));
+        assertEquals(plain.length, decrypted.toByteArray().length);
+        assertTrue(Arrays.equals(plain, decrypted.toByteArray()));
     }
 
     @Test
@@ -91,7 +93,7 @@ public class StreamTest {
         decrypted.close();
         decrypter.close();
 
-        Assert.assertEquals(plain.length, decrypted.toByteArray().length);
-        Assert.assertTrue(Arrays.equals(plain, decrypted.toByteArray()));
+        assertEquals(plain.length, decrypted.toByteArray().length);
+        assertTrue(Arrays.equals(plain, decrypted.toByteArray()));
     }
 }

@@ -1,6 +1,6 @@
 package jpass.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAccessor;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DateUtilsTest {
     ////////////////////////////////////////////////////////////////////////////////////////////
