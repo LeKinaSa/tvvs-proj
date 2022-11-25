@@ -10,11 +10,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- JUnit related -->
-        <surefire.plugin.version>2.20</surefire.plugin.version>
-        <junit.jupiter.version>5.1.1</junit.jupiter.version>
-        <junit.platform.version>1.1.1</junit.platform.version>
+        <surefire.plugin.version>3.0.0-M7</surefire.plugin.version>
+        <junit.jupiter.version>5.9.1</junit.jupiter.version>
         <junit.version>4.12</junit.version>
-        <junit.vintage.version>5.1.1</junit.vintage.version>
+        <junit.vintage.version>5.9.1</junit.vintage.version>
     </properties>
     <dependencies>
         <dependency>
@@ -48,18 +47,6 @@
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
             <version>${junit.vintage.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-runner</artifactId>
-            <version>${junit.platform.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
-            <version>${junit.platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -208,11 +195,6 @@
                 <version>${surefire.plugin.version}</version>
                 <dependencies>
                     <dependency>
-                            <groupId>org.junit.platform</groupId>
-                            <artifactId>junit-platform-surefire-provider</artifactId>
-                            <version>${junit.platform.version}</version>
-                    </dependency>
-                    <dependency>
                             <groupId>org.junit.jupiter</groupId>
                             <artifactId>junit-jupiter-engine</artifactId>
                             <version>${junit.jupiter.version}</version>
@@ -225,6 +207,7 @@
                 </dependencies>
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
+                    <argLine>-Xmx512m</argLine>
                 </configuration>
             </plugin>
             <plugin>
