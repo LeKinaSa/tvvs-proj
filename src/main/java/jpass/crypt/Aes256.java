@@ -307,7 +307,7 @@ public final class Aes256 {
      *
      * @return result of the multiplication
      */
-    private byte mul(int a, byte b) {
+    public byte mul(int a, byte b) {
         int result = 0;
         int first = a;
         int current = b & 0xff;
