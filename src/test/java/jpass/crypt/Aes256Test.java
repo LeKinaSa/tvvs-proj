@@ -1,11 +1,17 @@
 package jpass.crypt;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 /**
  * Test values for the &quot;Advanced Encryption Standard&quot; (AES). These values are part of
@@ -74,5 +80,25 @@ public class Aes256Test {
             cipher.decrypt(encrypted, 0, decrypted, 0);
             assertTrue(Arrays.equals(data, decrypted));
         }
+    }
+
+    private static Stream<Arguments> mulTestParams() {
+        return Stream.of(
+            Arguments.of(0x00, (byte) 0x00),
+            Arguments.of(0x01, (byte) 0xff),
+            Arguments.of(0x02, (byte) 0xe5),
+            Arguments.of(0x0c, (byte) 0x68)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("mulTestParams")
+    public void mulDataflowTest(int a, byte expected) {
+        byte b = (byte) 0xff;
+        Aes256 cipher = new Aes256(new byte[32]);
+
+        byte c = cipher.mul(a, b);
+
+        assertEquals(expected, c);
     }
 }

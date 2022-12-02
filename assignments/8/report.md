@@ -262,9 +262,9 @@ Selected functions:
                     - all-p-uses: N/A (there are no p-uses)
                     - all-uses: paths 1, 3, 4, 5
     - Unit tests generated
-        | Inputs (`a`, `b`) | Paths Covered | Expected Output | Outcome     |
-        | ---          | ---                                      | ---             | ---         |
-        | (0x00, 0x00) | `a`: 1; `b`: 1; `result`: 5;     `first`: 2                                   | 0 |  |
-        | (0x01, 0xff) | `a`: 1; `b`: 1; `result`: 1,6,7; `first`: 1,3,8,11;          `current`: 1,5   | | |
-        | (0x02, 0xff) | `a`: 1; `b`: 1; `result`: 6,7;   `first`: 1,4,6,7,8,9,11;    `current`: 3,5   | | |
-        | (0x0c, 0xff) | `a`: 1; `b`: 1; `result`: 6,7;   `first`: 1,4,6,7,8,9,10,11; `current`: 3,4,5 | | |
+        | Inputs (`a`, `b`) | Paths Covered                                                 | Expected Output | Outcome     |
+        | ---          | ---                                                                           | ---  | ---         |
+        | (0x00, 0x00) | `a`: 1; `b`: 1; `result`: 5;     `first`: 2                                   | 0x00 | Test passed |
+        | (0x01, 0xff) | `a`: 1; `b`: 1; `result`: 1,6,7; `first`: 1,3,8,11;          `current`: 1,5   | 0xff | Test passed |
+        | (0x02, 0xff) | `a`: 1; `b`: 1; `result`: 6,7;   `first`: 1,4,6,7,8,9,11;    `current`: 3,5   | 0xe5 | Test passed |
+        | (0x0c, 0xff) | `a`: 1; `b`: 1; `result`: 6,7;   `first`: 1,4,6,7,8,9,10,11; `current`: 3,4,5 | 0x68 | Test passed |
