@@ -54,6 +54,10 @@ Selected functions:
                     - all-p-uses: N/A (there are no p-uses)
                     - all-uses: paths 2, 3
     - Unit tests generated
+        | Inputs (`text`, `length`) | Paths Covered | Expected Output | Outcome     |
+        | ---                       | ---           | ---             | ---         |
+        | ("abcdef", 3)             | text: 1,2,4; length: 1,3; result: 3 | "abc..."        | Test passed |
+        | ("", 3)                   | text: 1,3; length: 2; result: 2 | ""              | Test passed |
 
 2. `Cbc.encrypt(byte[] data, int length)` (Cbc.java, line 161)
     - Function definition
@@ -106,7 +110,7 @@ Selected functions:
                 | pair id | def  | use       | path  |
                 | ---     | ---  | ---       | ---   |
                 | 1       | L161 | (L168, T) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`>), L167, L168, L169> |
-                | 2       | L161 | (L168, F) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`>), L167, L168, L166> |
+                | 2       | L161 | (L168, F) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`), L167, L168, L166 (`++i`)> |
                 - Coverage criteria:
                     - all-defs: path 1
                     - all-c-uses: N/A (there are no c-uses)
@@ -116,24 +120,24 @@ Selected functions:
                 | pair id | def  | use  | path                                                                    |
                 | ---     | ---  | ---  | ---                                                                     |
                 | 1       | L161 | L169 | <L161, L162, L166 (`int i = 0`), L166 (`i < length`), L167, L168, L169> |
-                | 2       | L161 | end  | <L161, L162, L166 (`int i = 0`), end>                                   |
+                | 2       | L161 | end  | <L161, L162, L166 (`int i = 0`), L166 (`i < length`), end>                                   |
                 | 3       | L167 | L169 | <L167, L168, L169>                                                      |
                 | 4       | L167 | end  | <L167, L168, L169, L170, L171, L166 (`++i`), L166 (`i < length`), end>  |
                 | 5       | L167 | end  | <L167, L168,                 , L166 (`++i`), L166 (`i < length`), end>  |
-                - There isn't a def-clear path between the definition in L161 and the c-use in L169 since the variable is redefined in L167. So, this variable cannot meet the coverage criteria of `all-defs`, `all-c-uses`, `all-p-uses` and `all-uses`.
+                - There isn't a def-clear path between the definition in L161 and the c-use in L169, since the variable is redefined in L167. So, this variable cannot meet the coverage criteria of `all-defs`, `all-c-uses`, `all-p-uses` and `all-uses`.
                 - Coverage criteria:
                     - all-defs: paths 2, 3
                     - all-c-uses: There isn't a def-clear path between all the definitions and all the c-uses
-                        - There isn't a def-clear path between the definition in L161 and the c-use in L169 since the variable is redefined in L167.
+                        - There isn't a def-clear path between the definition in L161 and the c-use in L169, since the variable is redefined in L167.
                     - all-p-uses: N/A (there are no p-uses)
                     - all-uses: There isn't a def-clear path between all the definitions and all the c-uses and p-uses
-                        - There isn't a def-clear path between the definition in L161 and the c-use in L169 since the variable is redefined in L167.
+                        - There isn't a def-clear path between the definition in L161 and the c-use in L169, since the variable is redefined in L167.
             - Variable `this._overflowUsed`
                 | pair id | def  | use       | path                 |
                 | ---     | ---  | ---       | ---                  |
-                | 1       | L161 |  L167     | <L161, L162, L166 (`int i = 0`), L166 (`i < length`>), L167>                     |
-                | 2       | L161 | (L168, T) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`>), L167, L168, L169>         |
-                | 3       | L161 | (L168, F) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`>), L167, L168, L166 (`++i`)> |
+                | 1       | L161 |  L167     | <L161, L162, L166 (`int i = 0`), L166 (`i < length`), L167>                     |
+                | 2       | L161 | (L168, T) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`), L167, L168, L169>         |
+                | 3       | L161 | (L168, F) | <L161, L162, L166 (`int i = 0`), L166 (`i < length`), L167, L168, L166 (`++i`)> |
                 | 4       | L167 |  L167     | <L167, L167>                                                                     |
                 | 5       | L161 | (L168, T) | <L167, L168, L169>                                                               |
                 | 6       | L161 | (L168, F) | <L167, L168, L166 (`++i`)>                                                       |
@@ -143,11 +147,11 @@ Selected functions:
                 - Coverage criteria:
                     - all-defs: paths 1, 4, 7
                     - all-c-uses: There isn't a def-clear path between all the definitions and all the c-uses
-                        - There isn't a def-clear path between the definition in L161 and the c-use in L167 since the variable is redefined in L167.
+                        - There isn't a def-clear path between the definition in L161 and the c-use in L167, since the variable is redefined in L167.
                     - all-p-uses: There isn't a def-clear path between all the definitions and all the p-uses
-                        - There isn't a def-clear path between the definition in L161 and the p-use in L168 since the variable is redefined in L167.
+                        - There isn't a def-clear path between the definition in L161 and the p-use in L168, since the variable is redefined in L167.
                     - all-uses: There isn't a def-clear path between all the definitions and all the c-uses and p-uses
-                        - There isn't a def-clear path between the definition in L161 and the c-use in L167 or the p-use in L168 since the variable is redefined in L167.
+                        - There isn't a def-clear path between the definition in L161 and the c-use in L167 or the p-use in L168, since the variable is redefined in L167.
             - Variable `this._output`
                 | pair id | def  | use  | path                                                                      |
                 | ---     | ---  | ---  | ---                                                                       |
@@ -160,20 +164,29 @@ Selected functions:
             - Variable `this._outBuffer`
                 | pair id | def  | use  | path                 |
                 | ---     | ---  | ---  | ---                  |
-                | 1 | L161 | L170 | <L161, L162, L166 (`int = 0`), L166 (`i < length`), L167, L168, L166(`++i`), L166 (`i < length`), L167, L168, L169, L170> |
+                | 1 | L161 | L170 | <L161, L162, L166 (`int = 0`), L166 (`i < length`), L167, L168, L166 (`++i`), L166 (`i < length`), L167, L168, L169, L170> |
                 | 2       | L161 | L170 | <L161, L162, L166 (`int = 0`), L166 (`i < length`), L167, L168, L169, L170>                            |
-                | 3       | L161 | end  | <L161, L162, L166 (`int = 0`), L166 (`i < length`), L167, L168, L166(`++i`), L166 (`i < length`), end> |
+                | 3       | L161 | end  | <L161, L162, L166 (`int = 0`), L166 (`i < length`), L167, L168, L166 (`++i`), L166 (`i < length`), end> |
                 | 4       | L161 | end  | <L161, L162, L166 (`int = 0`), L166 (`i < length`), end>                                               |
                 | 5       | L169 | L170 | <L169, L170>                                                                                           |
                 | 6       | L169 | end  | <L169, L170, L171, L166 (`++i`), L166 (`i < length`), end>                                             |
                 - Coverage criteria:
                     - all-defs: path 4, 5
                     - all-c-uses: There isn't a def-clear path between all the definitions and all the c-uses
-                        - There isn't a def-clear path between the definition in L161 and the c-use in L170 since the variable is redefined in L169.
+                        - There isn't a def-clear path between the definition in L161 and the c-use in L170, since the variable is redefined in L169.
                     - all-p-uses: N/A (there are no p-uses)
                     - all-uses: There isn't a def-clear path between all the definitions and all the c-uses
-                        - There isn't a def-clear path between the definition in L161 and the c-use in L170 since the variable is redefined in L169.
+                        - There isn't a def-clear path between the definition in L161 and the c-use in L170, since the variable is redefined in L169.
     - Unit tests generated
+        - there are some def-clear paths which cannot be tested, since their transitions cannot happen
+            - `length`: 4, `i`: 2, and `this._outBuffer`: 4 would require `i < length` to be False the first time it is executed. However, in the first execution, `i` is always 0 and `length` is always a positive number (> 0).
+
+        | Inputs (`data`, `length`) | Paths Covered | Expected Output | Outcome     |
+        | ---                       | ---           | ---             | ---         |
+        | ({}, 0) | `data`: 1; `length`: 1 |  |  |
+        | ({0x01, 0x01, 0x01, 0x01}, 4) | `data`: 2,3; `length`: 2,3; `i`: 1,4,5,6,7,8,9; `BLOCK_SIZE`: 2; `this._overflowUsed`: 1,4 |  |  |
+        | ({0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}, 17) | `data`: 2,3; `length`: 2,3; `i`: 1,4,5,6,7,8,9; `BLOCK_SIZE`: 2; `this._overflow`: 3; `this._overflowUsed`: 1,4,7; `this._outBuffer`: 5 |  |  |
+        | ({0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01}, 15) + ({0x01}, 1) | `data`: 2,3; `length`: 2,3; `i`: 1,4,5,6,7,8,9; `BLOCK_SIZE`: 1,2; `this._overflow`: 3; `this._overflowUsed`: 1,4; `this._output`: 1; `this._outBuffer`: 5 |  |  |
 
 3. `Aes256.mul(int a, byte b)` (Aes256.java, line 310)
     - Note: we changed this function from private to public to use it in our tests
@@ -249,3 +262,9 @@ Selected functions:
                     - all-p-uses: N/A (there are no p-uses)
                     - all-uses: paths 1, 3, 4, 5
     - Unit tests generated
+        | Inputs (`a`, `b`) | Paths Covered | Expected Output | Outcome     |
+        | ---          | ---                                      | ---             | ---         |
+        | (0x00, 0x00) | `a`: 1; `b`: 1; `result`: 5;     `first`: 2                                   | 0 |  |
+        | (0x01, 0xff) | `a`: 1; `b`: 1; `result`: 1,6,7; `first`: 1,3,8,11;          `current`: 1,5   | | |
+        | (0x02, 0xff) | `a`: 1; `b`: 1; `result`: 6,7;   `first`: 1,4,6,7,8,9,11;    `current`: 3,5   | | |
+        | (0x0c, 0xff) | `a`: 1; `b`: 1; `result`: 6,7;   `first`: 1,4,6,7,8,9,10,11; `current`: 3,4,5 | | |
