@@ -2,6 +2,7 @@ package jpass.crypt;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -254,5 +255,70 @@ public class CbcTest {
         byte[] _decryptedAfter = _decrypted.toByteArray();
 
         assertTrue(Arrays.equals(_decryptedBefore, _decryptedAfter));
+    }
+    
+    private byte[] getDataArray(int length) {
+        byte[] data = new byte[length];
+        for (int i = 0; i < length; i++) {
+            data[i] = 0x01;
+        }
+        return data;
+    }
+
+    private byte[] getExpectedResult(int length) {
+        byte[] empty = {};
+        byte[] block = {(byte) 0x7b, (byte) 0xc3, (byte) 0x02, (byte) 0x6c,
+                        (byte) 0xd7, (byte) 0x37, (byte) 0x10, (byte) 0x3e,
+                        (byte) 0x62, (byte) 0x90, (byte) 0x2b, (byte) 0xcd,
+                        (byte) 0x18, (byte) 0xfb, (byte) 0x01, (byte) 0x63};
+
+        switch (length) {
+            case 0:
+            case 4:
+                return empty;
+            case 16:
+            case 17:
+                return block;
+            default:
+                return empty;
+        }
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, 4, 17})
+    public void encryptDataflowTest1(int length) {
+        byte[] data = getDataArray(length);
+        byte[] expectedResult = getExpectedResult(length);
+        
+        try {
+            _encrypt.encrypt(data, length);
+        }
+        catch (IOException e) {
+            fail(e.getMessage());
+        }
+
+        byte[] result = _encrypted.toByteArray();
+        assertEquals(expectedResult.length, result.length);
+        assertTrue(Arrays.equals(expectedResult, result));
+    }
+
+    @Test
+    public void encryptDataflowTest2() {
+        int length1 = 15, length2 = 1;
+        byte[] data1 = getDataArray(length1);
+        byte[] data2 = getDataArray(length2);
+        byte[] expectedResult = getExpectedResult(length1 + length2);
+
+        try {
+            _encrypt.encrypt(data1, length1);
+            _encrypt.encrypt(data2, length2);
+        }
+        catch (IOException e) {
+            fail(e.getMessage());
+        }
+        
+        byte[] result = _encrypted.toByteArray();
+        assertEquals(expectedResult.length, result.length);
+        assertTrue(Arrays.equals(expectedResult, result));
     }
 }
