@@ -243,6 +243,31 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!-- PIT library -->
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.10.3</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>1.0.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <excludedClasses>
+                        <param>jpass.ui.*</param>
+                        <param>jpass.JPass</param>
+                        <param>jpass.util.ClipboardUtils</param>
+                        <param>jpass.util.SpringUtilities</param>
+                    </excludedClasses>
+                    <excludedTestClasses>
+                        <param>jpass.util.ClipboardUtilsTest</param>
+                    </excludedTestClasses>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

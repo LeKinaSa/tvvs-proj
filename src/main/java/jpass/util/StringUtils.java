@@ -51,7 +51,7 @@ public final class StringUtils {
      */
     public static String stripNonValidXMLCharacters(final String in) {
         if (in == null || in.isEmpty()) {
-            return in;
+            return "";
         }
         StringBuilder out = new StringBuilder();
         char current;
@@ -74,6 +74,9 @@ public final class StringUtils {
     }
 
     public static String stripString(String text, int length) {
+        if (length < 0) {
+            return "...";
+        }
         String result = text;
         if (text != null && text.length() > length) {
             result = text.substring(0, length) + "...";
