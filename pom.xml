@@ -129,7 +129,7 @@
             </plugin>
 
             <!-- Static tools: Checkstyle, PMD -->
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -188,7 +188,7 @@
             </plugin>
 
             <!-- JaCoCo library -->
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -261,6 +261,7 @@
                         <param>jpass.ui.*</param>
                         <param>jpass.JPass</param>
                         <param>jpass.util.ClipboardUtils</param>
+                        <param>jpass.util.ClipboardUtils$EmptyClipboardContent</param>
                         <param>jpass.util.SpringUtilities</param>
                     </excludedClasses>
                     <excludedTestClasses>
