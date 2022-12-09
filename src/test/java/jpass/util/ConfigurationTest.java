@@ -25,6 +25,14 @@ public class ConfigurationTest {
     }
 
     @Test
+    public void booleanTest2() {
+        Configuration config = Configuration.getInstance();
+        Boolean result = config.is("ui.theme.dark.mode.enabled", false);
+
+        assertTrue(result);
+    }
+
+    @Test
     public void integerTest() {
         Configuration config = Configuration.getInstance();
         Integer integer = config.getInteger("default.password.generation.length", 10);
