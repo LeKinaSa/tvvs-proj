@@ -208,7 +208,7 @@ public final class Aes256 {
      * This array will be modified.
      * @return returns the modified {@code value}
      */
-    private byte[] substituteWord(byte[] value) {
+    public byte[] substituteWord(byte[] value) {
         for (int i = 0; i < WORD_SIZE; ++i) {
             value[i] = this._sBox[value[i] & 0xff];
         }
@@ -223,7 +223,7 @@ public final class Aes256 {
      * @param value Array in which the first {@code WORD_SIZE} {@code byte}'s will be changed due to
      * the rotation. The contents of this array is changed by this invocation.
      */
-    private byte[] rotate(byte[] value) {
+    public byte[] rotate(byte[] value) {
         byte tmp = value[0];
         for (int i = 1; i < WORD_SIZE; ++i) {
             value[i - 1] = value[i];

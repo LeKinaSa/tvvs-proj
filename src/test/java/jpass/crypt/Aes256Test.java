@@ -100,4 +100,31 @@ public class Aes256Test {
 
         assertEquals(expected, c);
     }
+
+    @Test
+    public void rotateTest() {
+        byte[] value    = {(byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04};
+        byte[] expected = {(byte) 0x02, (byte) 0x03, (byte) 0x04, (byte) 0x01};
+
+        Aes256 a = new Aes256(new byte[32]);
+
+        byte[] result = a.rotate(value);
+
+        assertEquals(expected.length, result.length);
+        assertTrue(Arrays.equals(expected, result));
+    }
+
+    @Test
+    public void substituteTest() {
+        byte[] value    = {(byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04};
+        byte[] expected = {(byte) 0x7c, (byte) 0x77, (byte) 0x7b, (byte) 0xf2};
+
+        Aes256 a = new Aes256(new byte[32]);
+
+        byte[] result = a.substituteWord(value);
+
+        assertEquals(expected.length, result.length);
+        assertTrue(Arrays.equals(expected, result));
+    }
+    // public byte[] rotate(byte[] value)
 }
