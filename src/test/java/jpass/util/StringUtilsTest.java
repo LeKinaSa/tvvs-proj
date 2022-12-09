@@ -3,6 +3,8 @@ package jpass.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 public class StringUtilsTest {
     ////////////////////////////////////////////////////////////////////////////////////////////
@@ -222,5 +224,13 @@ public class StringUtilsTest {
         String result = StringUtils.stripString(text);
 
         assertEquals(text, result);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings =  {"\u0009", "\u0020", "\uD7FF", "\uE000", "\uFFFD", "\u10000", "\u10FFFF"})
+    public void stringTest(String data) {
+        String result = StringUtils.stripNonValidXMLCharacters(data);
+
+        assertEquals(data, result);
     }
 }
