@@ -1,7 +1,8 @@
 # Created by http://www.gitignore.io
 
 ### Maven ###
-target/
+target/*
+!target/jpass.properties
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
