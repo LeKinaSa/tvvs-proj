@@ -1,7 +1,7 @@
 
 # Project for the "Software Testing, Verification and Validation" Curricular Unit
 
-Small Assignments made on top of an existing project provided by the teacher (![JPass](https://github.com/LeKinaSa/tvvs-tps/blob/main/README_imported.md))
+Small Assignments made on top of an existing project provided by the teacher ([JPass](https://github.com/LeKinaSa/tvvs-tps/blob/main/README_imported.md))
 
 | Assignment | Topic |
 | ---        | ---   |
